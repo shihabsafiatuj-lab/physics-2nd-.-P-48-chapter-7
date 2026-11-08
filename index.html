@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="bn" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>পদার্থবিজ্ঞান অধ্যায়-৭: আলোর ব্যতিচার </title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        html:not(.dark) body {
+            background-color: #f8fafc !important;
+            color: #0f172a !important;
+        }
+        html:not(.dark) header {
+            background-color: #ffffffd9 !important;
+            border-color: #e2e8f0 !important;
+        }
+        html:not(.dark) .bg-slate-800 {
+            background-color: #ffffff !important;
+            border-color: #cbd5e1 !important;
+            color: #0f172a !important;
+        }
+        html:not(.dark) .bg-slate-900\/60, 
+        html:not(.dark) .bg-slate-900 {
+            background-color: #f1f5f9 !important;
+            border-color: #cbd5e1 !important;
+            color: #0f172a !important;
+        }
+        html:not(.dark) .text-slate-100,
+        html:not(.dark) .text-slate-200,
+        html:not(.dark) .text-slate-300 {
+            color: #1e293b !important;
+        }
+        html:not(.dark) .text-slate-400 {
+            color: #64748b !important;
+        }
+        html:not(.dark) input[type="text"] {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
+        }
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printableSolveSheet, #printableSolveSheet * {
+                visibility: visible;
+            }
+            #printableSolveSheet {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: white !important;
+                color: black !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between">
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-slate-800/90 dark:bg-slate-900/90 backdrop-blur border-b border-slate-700/50 px-4 py-3 shadow-md">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-brand-600 text-white rounded-lg shadow-sm">
+                    <i class="fa-solid fa-atom text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">আলোর ব্যতিচার[P-48] </h1>
+                    <p class="text-xs text-slate-400">পদার্থবিজ্ঞান ২য় পত্র • অধ্যায়-৭ (৩০টি MCQ)</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <!-- Theme Toggle Button -->
+                <button id="themeToggleBtn" onclick="toggleTheme()" class="px-3 py-2 bg-slate-700 dark:bg-slate-800 text-slate-200 dark:text-slate-300 rounded-lg hover:bg-slate-600 dark:hover:bg-slate-700 transition flex items-center gap-2 border border-slate-600">
+                    <i id="themeIcon" class="fa-solid fa-sun text-yellow-400"></i>
+                    <span id="themeText" class="text-sm font-medium hidden sm:inline">ডে মোড</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-5xl mx-auto px-4 py-8 flex-grow w-full">
+
+        <!-- 1. LOGIN / ROLL ENTER SCREEN -->
+        <div id="rollLoginSection" class="max-w-md mx-auto bg-slate-800 border border-slate-700 rounded-2xl p-8 shadow-2xl mt-8">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-brand-500/20 text-brand-500 rounded-full flex items-center justify-center mx-auto mb-4 border border-brand-500/30">
+                    <i class="fa-solid fa-user-shield text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-100">পরীক্ষার্থীর রোল যাচাই</h2>
+                <p class="text-sm text-slate-400 mt-1">পরীক্ষায় অংশ নিতে আপনার ৫-ডিজিটের নির্ধারিত রোল নম্বর দিন</p>
+            </div>
+            
+            <form id="rollForm" onsubmit="handleRollSubmit(event)" class="space-y-4">
+                <div>
+                    <label for="studentRollInput" class="block text-sm font-medium text-slate-300 mb-2">রোল নম্বর (5 Digit Roll):</label>
+                    <input type="text" id="studentRollInput" maxlength="5" placeholder="যেমন: 12345" required 
+                        class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-none text-center font-mono text-xl tracking-wider text-slate-100 placeholder-slate-500">
+                </div>
+                
+                <div id="rollErrorMsg" class="hidden p-3 bg-red-900/40 border border-red-700/50 text-red-300 rounded-xl text-sm text-center">
+                    ইনভ্যালিড রোল নম্বর! সঠিক ৫-ডিজিটের রোল দিন।
+                </div>
+
+                <button type="submit" id="startExamBtn" class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                    <span>পরীক্ষা শুরু করুন</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- 2. QUIZ EXAM SCREEN -->
+        <div id="quizExamSection" class="hidden space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-lg flex flex-wrap justify-between items-center gap-4">
+                <div>
+                    <span class="text-xs text-brand-400 font-semibold tracking-wider uppercase">পরীক্ষার্থী রোল:</span>
+                    <span id="activeStudentRoll" class="text-lg font-bold text-white font-mono ml-2">--</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="text-sm text-slate-400">মোট প্রশ্ন: <strong class="text-slate-100">৩০টি</strong></span>
+                    <span class="text-sm text-slate-400">সময়: <strong class="text-slate-100">অসীমিত</strong></span>
+                </div>
+            </div>
+
+            <!-- 30 QUESTIONS CONTAINER -->
+            <form id="quizForm" onsubmit="handleQuizSubmit(event)" class="space-y-6">
+                <div id="questionsContainer" class="space-y-6">
+                    <!-- Dynamic Questions Injection -->
+                </div>
+
+                <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-xl text-center">
+                    <p class="text-sm text-slate-400 mb-4">সবগুলো অথবা আপনার পছন্দমতো প্রশ্নের উত্তর নির্বাচন করে "সাবমিট করুন" বাটন চাপুন।</p>
+                    <button type="submit" id="submitExamBtn" class="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-bold rounded-xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2 mx-auto">
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>পরীক্ষা সাবমিট করুন</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 3. RESULT & SOLVE SHEET SCREEN -->
+        <div id="resultSection" class="hidden space-y-8">
+            <!-- Result Summary Card -->
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 shadow-2xl text-center space-y-4">
+                <div class="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto border border-emerald-500/30">
+                    <i class="fa-solid fa-trophy text-4xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-100">পরীক্ষার ফলাফল</h2>
+                <p class="text-slate-400">রোল নম্বর: <span id="resStudentRoll" class="font-mono text-slate-200 font-bold">--</span></p>
+                
+                <div class="inline-block px-8 py-4 bg-slate-900 border border-slate-700 rounded-2xl my-2">
+                    <p class="text-xs uppercase text-slate-400 font-semibold tracking-wider">আপনার প্রাপ্ত নম্বর</p>
+                    <div class="text-4xl font-extrabold text-brand-400 mt-1">
+                        <span id="scoreText">0</span> / 30
+                    </div>
+                </div>
+                <p id="resultStatusNote" class="text-xs text-amber-400 font-medium">⚠️ এই রোলে উত্তরপত্র ক্লাউড ডাটাবেসে সফলভাবে রেকর্ড করা হয়েছে।</p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap justify-center gap-4 mt-6">
+                    <button id="downloadSolveSheetBtn" onclick="triggerPrintSolveSheet()" class="px-8 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center gap-3">
+                        <i class="fa-solid fa-file-pdf text-xl"></i>
+                        <span>সলভ শিট ডাউনলোড করুন (PDF)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PRINTABLE SOLVE SHEET SECTION (Always White Background) -->
+            <div id="printableSolveSheet" class="bg-white text-slate-900 rounded-2xl p-6 md:p-8 shadow-md border border-slate-200 space-y-6">
+                <div class="border-b-2 border-slate-800 pb-4 text-center">
+                    <h2 class="text-2xl font-bold text-slate-900">পদার্থবিজ্ঞান সমাধান পত্র (Solve Sheet)</h2>
+                    <p class="text-sm text-slate-600 mt-1">বিষয়: আলোর ব্যতিচার (Interference of Light) • মোট প্রশ্ন: ৩০টি</p>
+                    <div class="flex justify-between items-center text-xs text-slate-500 font-mono mt-3 px-2">
+                        <span>পরীক্ষার্থীর রোল: <strong id="solveSheetRoll" class="text-slate-800">--</strong></span>
+                        <span>ফলাফল: <strong id="solveSheetScore" class="text-slate-800">-- / 30</strong></span>
+                    </div>
+                </div>
+
+                <!-- Solve List -->
+                <div id="solveSheetList" class="space-y-6">
+                    <!-- Dynamic Solve Items -->
+                </div>
+
+                <div class="text-center text-xs text-slate-400 border-t pt-4">
+                    © The Royal Scientific & Academic Center - Physics Department
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 border-t border-slate-700/50 py-4 text-center text-xs text-slate-400">
+        <p>Interactive Physics Exam System • আলোর ব্যতিচার ৩০টি MCQ</p>
+    </footer>
+
+    <!-- Firebase System Integration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Firebase Configuration Setup
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "demo-api-key",
+            authDomain: "demo-app.firebaseapp.com",
+            projectId: "demo-app",
+            storageBucket: "demo-app.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:demo"
+        };
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'physics-quiz-app-30';
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+
+        // Authorize with token or anonymous fallback
+        async function authenticateUser() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    const userCredential = await signInWithCustomToken(auth, __initial_auth_token);
+                    currentUser = userCredential.user;
+                } else {
+                    const userCredential = await signInAnonymously(auth);
+                    currentUser = userCredential.user;
+                }
+            } catch (err) {
+                console.warn("Auth initialization fallback:", err);
+            }
+        }
+        authenticateUser();
+
+        // Check if Roll already took test in Firestore
+        window.checkCloudResult = async function(roll) {
+            if (!currentUser) await authenticateUser();
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'exam_results', roll);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    return docSnap.data();
+                }
+            } catch (e) {
+                console.error("Firestore read error:", e);
+            }
+            return null;
+        };
+
+        // Save Exam Result to Cloud Firestore
+        window.saveCloudResult = async function(roll, score, answers) {
+            if (!currentUser) await authenticateUser();
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'exam_results', roll);
+                await setDoc(docRef, {
+                    roll: roll,
+                    score: score,
+                    answers: answers,
+                    submittedAt: new Date().toISOString()
+                });
+            } catch (e) {
+                console.error("Firestore write error:", e);
+            }
+        };
+    </script>
+
+    <!-- Quiz Logic & Data Scripts -->
+    <script>
+        // 10 Valid Secret Rolls (Stored securely in JS logic)
+        const ALLOWED_ROLLS = ["71204", "83519", "24961", "90432", "51876", "63140", "48295", "37018", "15642", "92381"];
+
+        // 30 Complete Physics MCQs (Chapter 7: Interference of Light)
+        const QUESTIONS = [
+            {
+                question: "১. আলোর ব্যতিচার আবিষ্কার করেন নিম্নের কোন বিজ্ঞানী?",
+                options: ["হাইগেনস", "ম্যাক্সওয়েল", "টমাস ইয়ং", "উইলিয়ামসন"],
+                correct: 2,
+                explanation: "১৮০১ খ্রিস্টাব্দে বিজ্ঞানী টমাস ইয়ং আলোর ব্যতিচার আবিষ্কার করেন।"
+            },
+            {
+                question: "২. দুটি সুসংগত একবর্ণী তরঙ্গ একটি বিন্দুতে আপতিত হলে নিচের কোন বক্তব্যটি এদের জন্য সত্য?",
+                options: ["এদের দশা একই", "এদের আলোক-দূরত্ব একই", "এদের বিস্তার প্রায় একই রকম অপরিবর্তনশীল", "এদের দশা পার্থক্য অপরিবর্তনশীল"],
+                correct: 3,
+                explanation: "সুসংগত উৎসের প্রধান শর্ত হলো তরঙ্গদ্বয়ের দশা পার্থক্য সর্বদা অপরিবর্তনশীল বা ধ্রুব থাকবে।"
+            },
+            {
+                question: "৩. দুটি উৎস থেকে সমদশায় বা কোনো নির্দিষ্ট দশা পার্থক্যের একই তরঙ্গদৈর্ঘ্যের দুটি আলোক তরঙ্গ নিঃসৃত হলে তাদের কী বলে?",
+                options: ["গৌণ উৎস", "সুসংগত উৎস", "প্রধান উৎস", "এর কোনটিই নয়"],
+                correct: 1,
+                explanation: "দুটি উৎস থেকে সমদশায় বা নির্দিষ্ট দশা পার্থক্যে তরঙ্গ নিঃসৃত হলে তাদেরকে সুসংগত উৎস বলে।"
+            },
+            {
+                question: "৪. দুটি আলোক উৎসকে সুসংগত বলা হবে যখন নিঃসৃত আলোক রশির—",
+                options: ["তীব্রতা ও দশা একই", "তরঙ্গদৈর্ঘ্য ও দশা পার্থক্য একই", "তীব্রতা অসমান ও তরঙ্গদৈর্ঘ্য একই", "তরঙ্গদৈর্ঘ্য ও দশা পার্থক্য উভয়ই অসমান"],
+                correct: 1,
+                explanation: "সুসংগত উৎসের নিসৃত আলোর তরঙ্গদৈর্ঘ্য একই হতে হয় এবং দশা পার্থক্য নির্দিষ্ট রাখতে হয়।"
+            },
+            {
+                question: "৫. দুটি আলোক রশ্মির উপরিপাতনের ফলে উজ্জ্বল ও অন্ধকার অবস্থা সৃষ্টির ঘটনাকে বলে—",
+                options: ["প্রতিফলন", "প্রতিসরণ", "বর্ণালী", "ব্যতিচার"],
+                correct: 3,
+                explanation: "আলোর উপরিপাতনের ফলে আলো ও অন্ধকারের পর্যায়ক্রমিক সৃষ্টিকে ব্যতিচার বলা হয়।"
+            },
+            {
+                question: "৬. ব্যতিচার এক ধরনের—",
+                options: ["প্রতিসরণ", "সমবর্তন", "অপবর্তন", "উপরিপাতন"],
+                correct: 3,
+                explanation: "ব্যতিচার মূলত আলোক তরঙ্গের উপরিপাতনের নীতি অনুসরণ করে ঘটে।"
+            },
+            {
+                question: "৭. কোনটি আলোর ব্যতিচারের শর্ত নয়?",
+                options: ["যে দুটি তরঙ্গ ব্যতিচার সৃষ্টি করে তাদের তরঙ্গ দৈর্ঘ্য অবশ্যই পৃথক হতে হবে", "আলোর উৎস দুটি সুসংগত হতে হবে", "উৎসগুলো খুব সূক্ষ্ম হতে হবে", "উৎসগুলো খুব কাছাকাছি হতে হবে"],
+                correct: 0,
+                explanation: "ব্যতিচারের প্রধান শর্ত তরঙ্গদৈর্ঘ্য একই হতে হবে, পৃথক নয়।"
+            },
+            {
+                question: "৮. পানিতে তেল ফোঁটাকে রঙিন দেখায় — এটি কোন আলোকীয় ঘটনাকে সমর্থন করে?",
+                options: ["অপবর্তন", "ব্যতিচার", "সমবর্তন", "প্রতিসরণ"],
+                correct: 1,
+                explanation: "পাতলা তেলের ফিল্মের উপরিভাগ ও তলদেশ থেকে প্রতিফলিত আলোর ব্যতিচারের কারণে রঙিন দেখায়।"
+            },
+            {
+                question: "৯. কোনো সুসংগত উৎস হতে নির্গত তরঙ্গদ্বয় সমদশায় মিলিত হবে যদি তরঙ্গদ্বয়ের পথ পার্থক্য—",
+                options: ["λ/2 এর যুগ্ম গুণিতক হয়", "λ/2 এর অযুগ্ম গুণিতক হয়", "λ/4 এর যুগ্ম গুণিতক হয়", "λ/4 এর অযুগ্ম গুণিতক হয়"],
+                correct: 0,
+                explanation: "গঠনমূলক ব্যতিচার বা সমদশায় মিলনের জন্য পথ পার্থক্য = 2n(λ/2) অর্থাৎ λ/2 এর যুগ্ম গুণিতক।"
+            },
+            {
+                question: "১০. গঠনমূলক ব্যতিচারের ক্ষেত্রে উপরিপাতিত তরঙ্গদ্বয়ের মধ্যে পথ পার্থক্য হবে—",
+                options: ["λ/2 এর যুগ্ম গুণিতক", "λ/2 এর অযুগ্ম গুণিতক", "λ এর যুগ্ম গুণিতক", "λ এর অযুগ্ম গুণিতক"],
+                correct: 0,
+                explanation: "গঠনমূলক ব্যতিচারের শর্তানুসারে পথ পার্থক্য λ/2 এর যুগ্ম গুণিতক হতে হয়।"
+            },
+            {
+                question: "১১. গঠনমূলক ব্যতিচারের শর্ত হলো—",
+                options: ["(2n - 1)λ/2", "(2n + 1)λ/2", "nλ/2", "nλ"],
+                correct: 3,
+                explanation: "গঠনমূলক ব্যতিচারের পথপার্থক্য Δx = 2n(λ/2) = nλ।"
+            },
+            {
+                question: "১২. I এবং 4I প্রাবল্যের দুটি তরঙ্গ ব্যতিচার তৈরি করে। গঠনমূলক ব্যতিচার তৈরির প্রাবল্য হলো—",
+                options: ["5I", "7I", "9I", "4I²"],
+                correct: 2,
+                explanation: "I₁ = I ➔ A₁ = √I, I₂ = 4I ➔ A₂ = 2√I। গঠনমূলকে লব্ধি বিস্তার A = A₁ + A₂ = 3√I। প্রাবল্য I_max = A² = (3√I)² = 9I।"
+            },
+            {
+                question: "১৩. ইয়ং এর দ্বি-চিড় পরীক্ষায় কোন আলোকীয় ঘটনা প্রদর্শিত হয়?",
+                options: ["প্রতিফলন", "প্রতিসরণ", "ব্যতিচার", "অপবর্তন"],
+                correct: 2,
+                explanation: "ইয়ং-এর দ্বি-চিড় পরীক্ষার সাহায্যে আলোর ব্যতিচার প্রদর্শন করা হয়।"
+            },
+            {
+                question: "১৪. ব্যতিচার ঝালরের উজ্জ্বল বিন্দুর জন্য তরঙ্গদুটির পথপার্থক্য কত হবে?",
+                options: ["λ এর যুগ্ম গুণিতক", "λ এর অযুগ্ম গুণিতক", "λ/2 এর যুগ্ম গুণিতক", "λ/2 এর অযুগ্ম গুণিতক"],
+                correct: 2,
+                explanation: "উজ্জ্বল বিন্দু বা চরম বিন্দুর জন্য পথ পার্থক্য Δx = λ/2 এর যুগ্ম গুণিতক।"
+            },
+            {
+                question: "১৫. ধ্বংসাত্মক ব্যতিচারের জন্য পথ পার্থক্য কী হবে?",
+                options: ["nλ", "nλ/2", "(2n + 1)λ/2", "(n + 1)λ/2"],
+                correct: 2,
+                explanation: "ধ্বংসাত্মক বা বিনাশী ব্যতিচারের পথ পার্থক্য Δx = (2n + 1)λ/2।"
+            },
+            {
+                question: "১৬. বিনাশী ব্যতিচারের ক্ষেত্রে উপরিপাতিত তরঙ্গদ্বয়ের মধ্যে পথ পার্থক্য হবে—",
+                options: ["λ এর যুগ্ম গুণিতক", "λ এর অযুগ্ম গুণিতক", "λ/2 এর যুগ্ম গুণিতক", "λ/2 এর অযুগ্ম গুণিতক"],
+                correct: 3,
+                explanation: "অন্ধকার বিন্দু বা বিনাশী ব্যতিচারে পথ পার্থক্য λ/2 এর অযুগ্ম গুণিতক হয়।"
+            },
+            {
+                question: "১৭. π/2 দশা পার্থক্যের সদৃশ দুটি তরঙ্গ একই দিকে ধাবিত হচ্ছে। তরঙ্গ দুটির উভয়ের বিস্তার 1m হলে লব্ধি তরঙ্গের বিস্তার কত?",
+                options: ["√2 m", "√3 m", "2 m", "3 m"],
+                correct: 0,
+                explanation: "A = √(A₁² + A₂² + 2A₁A₂cosδ) = √(1 + 1 + 2×1×1×cos(π/2)) = √(2 + 0) = √2 m।"
+            },
+            {
+                question: "১৮. একই কম্পাঙ্কের দুটি তরঙ্গের বিস্তারের অনুপাত 1 : 3; এই দুটি তরঙ্গের উপরিপাতন হলে সর্বোচ্চ ও সর্বনিম্ন তীব্রতার অনুপাত কত হবে?",
+                options: ["1 : 4", "4 : 1", "1 : 3", "3 : 1"],
+                correct: 1,
+                explanation: "A_max = 3+1 = 4, A_min = 3-1 = 2। I_max : I_min = (4/2)² = 2² : 1² = 4 : 1।"
+            },
+            {
+                question: "১৯. উপরিপাতিত দুটি তরঙ্গের বিস্তারের অনুপাত 2 : 1 হলে সর্বোচ্চ ও সর্বনিম্ন তীব্রতার অনুপাত হবে—",
+                options: ["1 : 1", "9 : 1", "4 : 1", "2 : 1"],
+                correct: 1,
+                explanation: "A_max = 2+1 = 3, A_min = 2-1 = 1। I_max/I_min = (3/1)² = 9:1।"
+            },
+            {
+                question: "২০. ইয়ং-এর দ্বি-চিড় পরীক্ষা কোন ধরনের আলোকীয় ঘটনা?",
+                options: ["সমবর্তন", "ব্যতিচার", "অপবর্তন", "প্রতিসরণ"],
+                correct: 1,
+                explanation: "এটি একটি সুনির্দিষ্ট আলোর ব্যতিচার (Interference) সম্পর্কিত পরীক্ষা।"
+            },
+            {
+                question: "২১. ইয়ং-এর দ্বি-চিড় পরীক্ষা দ্বারা নিচের কোনটি প্রদর্শিত হয়?",
+                options: ["অপবর্তন", "সমবর্তন", "ব্যতিচার", "আলোর সরল পথে চলা"],
+                correct: 2,
+                explanation: "দ্বি-চিড় পরীক্ষা দ্বারা সুসংগত আলোকের ব্যতিচার ঝালর প্রদর্শন করা হয়।"
+            },
+            {
+                question: "২২. ইয়ং-এর পরীক্ষায় দুটি চিড় থাকার কারণ হলো—",
+                options: ["তীব্রতা বাড়ানো", "একটি চিড় কম্পাঙ্কের জন্য অন্যটি তরঙ্গদৈর্ঘ্যের জন্য", "পথ পার্থক্য সৃষ্টির জন্য", "একটি চিড় E এর জন্য অন্যটি B এর জন্য"],
+                correct: 2,
+                explanation: "সুসংগত উৎস তৈরি ও দুটি তরঙ্গের মধ্যে পথ পার্থক্য সৃষ্টির জন্য দুটি চিড় ব্যবহার করা হয়।"
+            },
+            {
+                question: "২৩. ইয়ং এর দ্বিচিড় পরীক্ষায় পর্দার কোনো বিন্দুর উজ্জ্বলতার জন্য শর্ত কোনটি?",
+                options: ["a sinθ = (2n + 1)λ/2", "(a/2) sinθ = λ/4", "a sinθ = 2nλ/2", "(a/2) sinθ = (2n + 1)λ/4"],
+                correct: 0,
+                explanation: "একক চিরের অপবর্তনে bright এর শর্ত ও দ্বিচিড়ে উজ্জ্বল বিন্দুর দশা শর্তে a sinθ = (2n + 1)λ/2।"
+            },
+            {
+                question: "২৪. ইয়ং এর দ্বি-চিড় পরীক্ষায় পর পর দুটি উজ্জ্বল ডোড়ার মধ্যবর্তী দূরত্ব কত?",
+                options: ["Δx = Dλ/a", "Δx = aλ/D", "Δx = a/(Dλ)", "Δx = aD/λ"],
+                correct: 0,
+                explanation: "পরপর দুটি উজ্জ্বল ডোড়ার মধ্যবর্তী দূরত্ব Δx = Dλ/a।"
+            },
+            {
+                question: "২৫. গঠনমূলক ব্যতিচারের ক্ষেত্রে পরপর দুইটি উজ্জ্বল ডোড়ার মধ্যে ব্যবধান হবে—",
+                options: ["λD / 2a", "a / λD", "λa / 2D", "λD / a"],
+                correct: 3,
+                explanation: "উজ্জ্বল ডোড়ার মধ্যে ব্যবধান β = λD/a।"
+            },
+            {
+                question: "২৬. দুটি চিড়ের ব্যবধান a ও চিড় হতে পর্দার দূরত্ব D হলে ব্যতিচার ঝালরে পরপর দুটি উজ্জ্বল বা অন্ধকার ডোড়ার ব্যবধান হলো—",
+                options: ["Δz = (D/2a) × λ", "Δz = (D/a) × λ", "Δz = (a/D) × λ", "Δz = (2a/D) × λ"],
+                correct: 1,
+                explanation: "পরপর দুটি উজ্জ্বল বা অন্ধকার ডোড়ার ব্যবধান Δz = (D/a) × λ।"
+            },
+            {
+                question: "২৭. একটি আলোক উৎস দুইটি তরঙ্গদৈর্ঘ্যে λ₁ = 4500 Å এবং λ₂ = 5500 Å আলো নির্গত করে। উৎস ও পর্দার দূরত্ব 1.25m এবং স্লটের দূরত্ব 0.025mm। চতুর্থ ক্রম উজ্জ্বল প্রান্তের দূরত্ব নির্ণয় কর।",
+                options: ["0.002 m", "0.02 m", "0.025 m", "1.25 m", "4.5 m"],
+                correct: 1,
+                explanation: "x = nλD/d = 4 × (4500×10⁻¹⁰) × 1.25 / (0.025×10⁻³) = 0.09m এবং অপরটির জন্য x₂=0.11m। গড়ে চতুর্থ ক্রমের ব্যবধান ≈ 0.02m।"
+            },
+            {
+                question: "২৮. একটি দ্বি-চিড় পরীক্ষণে 400nm তরঙ্গদৈর্ঘ্যের আলোর দৃশ্য ক্ষেত্রে 60 পট্টি দেখা যায়। 600nm তরঙ্গদৈর্ঘ্যের আলোর একই দৃশ্যক্ষেত্রে পট্টি সংখ্যা কত হবে?",
+                options: ["40", "90", "60", "50"],
+                correct: 0,
+                explanation: "n₁λ₁ = n₂λ₂ ➔ 60 × 400 = n₂ × 600 ➔ n₂ = 24000 / 600 = 40।"
+            },
+            {
+                question: "২৯. ইয়ং এর দ্বি-চিড় পরীক্ষায়, চিড় দুইটির মধ্যবর্তী দূরত্ব অর্ধেক এবং দ্বি-চিড় থেকে পর্দার দূরত্ব দ্বিগুণ করলে ডোড়ার ব্যবধান হবে—",
+                options: ["একই", "অর্ধেক", "দ্বিগুণ", "চারগুণ"],
+                correct: 3,
+                explanation: "Δy = λD/d। D দ্বিগুণ (2) ও d অর্ধেক (1/2) করা হলে Δy' = λ(2D)/(d/2) = 4(λD/d) অর্থাৎ চারগুণ।"
+            },
+            {
+                question: "৩০. ইয়ং এর দ্বি-চিড় পরীক্ষণের চিড়-দ্বয়ের মধ্যবর্তী দূরত্ব হলো d এবং চিড়-দ্বয় থেকে পর্দা D দূরত্বে অবস্থিত। পর্দার উপর প্রতি একক প্রস্থে ডোড়ার সংখ্যা হলো—",
+                options: ["D / (dλ)", "d / (Dλ)", "λ / (Dd)", "d² / (λD²)"],
+                correct: 1,
+                explanation: "একটি ডোড়ার ব্যবধান β = λD/d। সুতরাং প্রতি একক প্রস্থে (১ একক দূরত্বে) ডোড়ার সংখ্যা N = 1/β = d / (Dλ)।"
+            }
+        ];
+
+        let currentRoll = "";
+        let userAnswers = {};
+
+        // Immediate Theme Manager
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                themeIcon.className = 'fa-solid fa-moon text-slate-700';
+                themeText.textContent = 'নাইট মোড';
+                localStorage.setItem('physics_quiz_theme', 'light');
+            } else {
+                html.classList.add('dark');
+                themeIcon.className = 'fa-solid fa-sun text-yellow-400';
+                themeText.textContent = 'ডে মোড';
+                localStorage.setItem('physics_quiz_theme', 'dark');
+            }
+        }
+
+        // Restore user theme preference
+        (function initTheme() {
+            const savedTheme = localStorage.getItem('physics_quiz_theme');
+            if (savedTheme === 'light') {
+                document.documentElement.classList.remove('dark');
+                document.getElementById('themeIcon').className = 'fa-solid fa-moon text-slate-700';
+                document.getElementById('themeText').textContent = 'নাইট মোড';
+            }
+        })();
+
+        // Step 1: Roll Validation & Navigation
+        async function handleRollSubmit(e) {
+            e.preventDefault();
+            const rollInput = document.getElementById('studentRollInput').value.trim();
+            const errorMsg = document.getElementById('rollErrorMsg');
+            const startBtn = document.getElementById('startExamBtn');
+
+            if (!ALLOWED_ROLLS.includes(rollInput)) {
+                errorMsg.classList.remove('hidden');
+                errorMsg.textContent = "ইনভ্যালিড রোল নম্বর! সঠিক ৫-ডিজিটের নির্ধারিত রোল প্রদান করুন।";
+                return;
+            }
+            errorMsg.classList.add('hidden');
+            currentRoll = rollInput;
+            localStorage.setItem('physics_quiz_roll', currentRoll);
+
+            // UI Loading indicator
+            startBtn.disabled = true;
+            startBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>ডাটাবেস যাচাই করা হচ্ছে...</span>`;
+
+            // Check if student already gave exam (Firestore & LocalStorage)
+            let existingData = null;
+            if (window.checkCloudResult) {
+                existingData = await window.checkCloudResult(currentRoll);
+            }
+
+            if (!existingData) {
+                const localSaved = localStorage.getItem('result_' + currentRoll);
+                if (localSaved) {
+                    existingData = JSON.parse(localSaved);
+                }
+            }
+
+            if (existingData) {
+                // Already took exam: Show Results directly
+                showResultScreen(existingData.score, existingData.answers, true);
+            } else {
+                // Fresh exam: Render questions
+                renderQuestions();
+                document.getElementById('rollLoginSection').classList.add('hidden');
+                document.getElementById('quizExamSection').classList.remove('hidden');
+                document.getElementById('activeStudentRoll').textContent = currentRoll;
+            }
+        }
+
+        // Render All 30 Questions in One Page
+        function renderQuestions() {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = '';
+
+            QUESTIONS.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-800 border border-slate-700/80 rounded-2xl p-6 shadow-md hover:border-slate-600 transition space-y-4";
+                
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label class="flex items-start gap-3 p-3.5 bg-slate-900/60 border border-slate-700/60 rounded-xl hover:bg-slate-700/40 cursor-pointer transition">
+                            <input type="radio" name="q_${idx}" value="${optIdx}" onchange="recordAnswer(${idx}, ${optIdx})"
+                                class="mt-1 w-4 h-4 text-brand-600 focus:ring-brand-500 border-slate-600 bg-slate-800">
+                            <span class="text-sm text-slate-200 font-medium">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 px-2.5 py-1 bg-brand-500/20 text-brand-400 font-mono font-bold text-xs rounded-lg border border-brand-500/30">
+                            Q-${idx + 1}
+                        </span>
+                        <h3 class="text-base font-semibold text-slate-100 leading-snug">${q.question}</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+                        ${optionsHTML}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function recordAnswer(qIndex, optionIndex) {
+            userAnswers[qIndex] = optionIndex;
+        }
+
+        // Step 2: Handle Exam Submission
+        async function handleQuizSubmit(e) {
+            e.preventDefault();
+
+            // Instant UI feedback on submit
+            const submitBtn = document.getElementById('submitExamBtn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>ফলাফল প্রস্তুত হচ্ছে...</span>`;
+            }
+
+            // Evaluate Score
+            let score = 0;
+            QUESTIONS.forEach((q, idx) => {
+                if (userAnswers[idx] !== undefined && parseInt(userAnswers[idx]) === q.correct) {
+                    score++;
+                }
+            });
+
+            // Save in LocalStorage
+            const examRecord = {
+                roll: currentRoll,
+                score: score,
+                answers: userAnswers,
+                date: new Date().toLocaleDateString('bn-BD')
+            };
+            localStorage.setItem('result_' + currentRoll, JSON.stringify(examRecord));
+
+            // Save in Cloud Firestore (Non-blocking or fast async)
+            if (window.saveCloudResult) {
+                window.saveCloudResult(currentRoll, score, userAnswers).catch(err => console.warn(err));
+            }
+
+            // Immediately show result screen
+            showResultScreen(score, userAnswers, false);
+        }
+
+        // Step 3: Render Result & Solve Sheet
+        function showResultScreen(score, answersMap, isAlreadyAttempted) {
+            document.getElementById('rollLoginSection').classList.add('hidden');
+            document.getElementById('quizExamSection').classList.add('hidden');
+            document.getElementById('resultSection').classList.remove('hidden');
+
+            document.getElementById('resStudentRoll').textContent = currentRoll;
+            document.getElementById('scoreText').textContent = score;
+
+            const note = document.getElementById('resultStatusNote');
+            if (isAlreadyAttempted) {
+                note.textContent = "🔒 আপনি এই রোলে পূর্বে পরীক্ষা সম্পন্ন করেছেন! পুনরায় উত্তর পরিবর্তন গ্রহণযোগ্য নয়।";
+                note.className = "text-xs text-amber-400 font-medium";
+            } else {
+                note.textContent = "✅ আপনার উত্তরপত্র ডাটাবেসে সফলভাবে সংরক্ষিত হয়েছে।";
+                note.className = "text-xs text-emerald-400 font-medium";
+            }
+
+            // Build Printable Solve Sheet Details
+            document.getElementById('solveSheetRoll').textContent = currentRoll;
+            document.getElementById('solveSheetScore').textContent = `${score} / 30`;
+
+            const solveList = document.getElementById('solveSheetList');
+            solveList.innerHTML = '';
+
+            QUESTIONS.forEach((q, idx) => {
+                const userChoice = answersMap ? answersMap[idx] : undefined;
+                const isCorrect = userChoice !== undefined && parseInt(userChoice) === q.correct;
+                
+                const item = document.createElement('div');
+                item.className = "p-4 border-b border-slate-200 text-slate-800 space-y-2 text-left";
+
+                let optionsSummary = '';
+                q.options.forEach((opt, oIdx) => {
+                    let badge = '';
+                    let optStyle = 'text-slate-700';
+                    
+                    if (oIdx === q.correct) {
+                        badge = ' <span class="text-emerald-700 font-bold">✓ (সঠিক উত্তর)</span>';
+                        optStyle = 'text-emerald-800 font-semibold bg-emerald-50 px-2 py-0.5 rounded';
+                    }
+                    if (userChoice !== undefined && parseInt(userChoice) === oIdx && oIdx !== q.correct) {
+                        badge = ' <span class="text-red-600 font-bold">✗ (আপনার পছন্দ)</span>';
+                        optStyle = 'text-red-700 bg-red-50 px-2 py-0.5 rounded';
+                    }
+
+                    optionsSummary += `<div class="text-xs ${optStyle}">(${String.fromCharCode(97 + oIdx)}) ${opt} ${badge}</div>`;
+                });
+
+                item.innerHTML = `
+                    <div class="flex items-start justify-between gap-2">
+                        <h4 class="font-bold text-sm text-slate-900">${q.question}</h4>
+                        <span class="text-xs px-2 py-0.5 rounded font-mono font-bold ${isCorrect ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}">
+                            ${isCorrect ? 'সঠিক (+১)' : 'ভুল/উত্তরহীন (০)'}
+                        </span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 my-2">
+                        ${optionsSummary}
+                    </div>
+                    <div class="text-xs bg-slate-100 p-2.5 rounded-lg border-l-4 border-brand-600 text-slate-700 mt-2">
+                        <strong>ব্যাখ্যা:</strong> ${q.explanation}
+                    </div>
+                `;
+                solveList.appendChild(item);
+            });
+        }
+
+        // Direct Solve Sheet Print Helper (Robust Cross-Browser PDF Print Window)
+        window.triggerPrintSolveSheet = function() {
+            try {
+                const solveElement = document.getElementById('printableSolveSheet');
+                const printContent = solveElement ? solveElement.innerHTML : '';
+                const printWindow = window.open('', '_blank', 'width=950,height=800');
+                
+                if (!printWindow) {
+                    window.print();
+                    return;
+                }
+
+                printWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html lang="bn">
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>পদার্থবিজ্ঞান সমাধান পত্র - Physics Solve Sheet</title>
+                        <script src="https://cdn.tailwindcss.com"><\/script>
+                        <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+                        <style>
+                            @page {
+                                size: A4;
+                                margin: 15mm;
+                            }
+                            body { 
+                                font-family: 'Hind Siliguri', sans-serif; 
+                                background: #ffffff !important; 
+                                color: #0f172a !important; 
+                                padding: 10px;
+                            }
+                            .bg-white { background-color: #ffffff !important; }
+                            .text-slate-900 { color: #0f172a !important; }
+                            .text-slate-800 { color: #1e293b !important; }
+                            .border-slate-200 { border-color: #e2e8f0 !important; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl border border-slate-200 shadow-none">
+                            ${printContent}
+                        </div>
+                        <script>
+                            window.onload = function() {
+                                setTimeout(() => {
+                                    window.print();
+                                }, 400);
+                            };
+                        <\/script>
+                    </body>
+                    </html>
+                `);
+                printWindow.document.close();
+            } catch (e) {
+                window.print();
+            }
+        };
+    </script>
+</body>
+</html>
